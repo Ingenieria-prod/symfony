@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApiCouchdbController!{% endblock %}
+
+
+
+{% block body %}
+
+<h2>Listado de Usuarios</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Usename</th>
+      <th scope="col">RUT</th>
+      <th scope="col">Nombre Completo</th>
+      <th scope="col">Compañia</th>
+      <th scope="col">
+      Acciones
+      <a type="button" class="btn btn-primary btn-sm" href="{{ path('app_new_user') }}">Crear nuevo usuario</a>
+      </th>
+    </tr>
+  </thead>
+ <tbody>
+    {% for user in users %}
+    <tr>
+        <th scope="row">{{user.name}}</th>
+        <td>{{user.rut}}</td>
+        <td>{{user.full_name}}</td>
+        <td>{{user.company}}</td>
+        <td>
+        <a type="button" class="btn btn-warning btn-sm" href="{{ path('app_show_user', {'id': user._id}) }}">show</a> 
+		    <a type="button" class="btn btn-success btn-sm" href="{{ path('app_edit_user', {'id': user._id}) }}">edit</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+ </tbody>
+</table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Usuario{% endblock %}
+
+{% block body %}
+    <h1>Edit Usuario </h1>
+    <h2 class="text-danger-emphasis">{{name}}</h2>
+    
+    {{ include('api_couchdb/_form.html.twig', {'button_label': 'Update'}) }}
+    <br/>
+    <a type="button" class="btn btn-secondary" href="{{ path('app_all_users') }}">Lista de Usuarios</a>
+
+
+{% endblock %}

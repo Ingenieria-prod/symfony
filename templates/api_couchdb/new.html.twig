@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agregar Usuario{% endblock %}
+
+{% block body %}
+    <h1>Crear Usuario</h1>
+
+    {{ include('api_couchdb/_form.html.twig') }}
+    <br/>
+    <a type="button" class="btn btn-secondary" href="{{ path('app_all_users') }}">back to list</a>
+{% endblock %}

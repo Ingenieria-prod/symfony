@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}AdminTech!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>AT</text></svg>">
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('resource/css/blog.css')}}"></link>
+        <link rel="stylesheet" href="{{asset('resource/bootstrap/css/bootstrap.min.css')}}"></link>
+        <link rel="stylesheet" href="{{asset('resource/css/style.css')}}"></link>
+
+        {# Stilos de mapas #}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></link>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css' rel='stylesheet'></link>
+        {% endblock %}
+
+        {% block javascripts %}
+            
+            <script src="{{asset('resource/js/javascript.js')}}"></script>    
+            <script src="{{asset('resource/bootstrap/js/bootstrap.min.js')}}"></script>
+
+            {# Mapas #}
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+            <script src='https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js'></script>
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+
+    </head>
+
+    <body>
+        <div class="container">
+        {% block nav %}
+            <header class="blog-header py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="link-secondary" href="{{path('app_index')}}">Home</a>
+                </div>
+                <div class="col-4 text-center">
+                    {#<a class="blog-header-logo text-dark" href="#">Large</a>#}
+                    <img class="blog-header-logo-img" src="{{asset('images/logo.webp')}}" alt="Admin Tech">
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    {# <a class="link-secondary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                    </a> #}
+                    {% if app.user %}
+                    <a class="btn btn-sm btn-outline-secondary" href="{{path('app_logout')}}">Logout</a>
+                    {% else %}
+                    <a class="btn btn-sm btn-outline-secondary" href="{{path('app_login')}}">Login</a>
+                    {% endif %}
+                </div>
+                </div>
+            </header>
+
+        {% block messages %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                   {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning">
+                   {{ message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+
+        {% block menu %}
+        <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline ">
+            <a class="nav-item nav-link link-body-emphasis active" href="{{ path('app_all_users') }}">CouchDB</a>
+            <a class="nav-item nav-link link-body-emphasis" href="{{path('app_admin_tech_index')}}">Postgres</a>
+            <a class="nav-item nav-link link-body-emphasis" href="{{path('app_index_mapas')}}">Mapas</a>
+            </nav>
+        </div>
+        {% endblock %}
+
+        {% endblock %}
+
+    
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% block script %}{% endblock %}
+
+    <footer class="blog-footer">    
+        {% block footer %}
+        <p>Desarrollo  -  <a href="#">Modo Estudio</a> </p>
+        {% endblock %}
+    </footer>
+    </body>
+</html>

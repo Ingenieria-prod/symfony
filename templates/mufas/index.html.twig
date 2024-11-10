@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mufas index{% endblock %}
+
+{% block body %}
+    <h1>Mufas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Zonal</th>
+                <th>Sitio</th>
+                <th>Cable</th>
+                <th>Codigo_mufa</th>
+                <th>Distancia_optica</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Referencia</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mufa in mufas %}
+            <tr>
+                <td>{{ mufa.id }}</td>
+                <td>{{ mufa.zonal }}</td>
+                <td>{{ mufa.sitio }}</td>
+                <td>{{ mufa.cable }}</td>
+                <td>{{ mufa.codigoMufa }}</td>
+                <td>{{ mufa.distanciaOptica }}</td>
+                <td>{{ mufa.latitud }}</td>
+                <td>{{ mufa.longitud }}</td>
+                <td>{{ mufa.referencia }}</td>
+                <td>
+                    <a type="button" class="btn btn-success" href="{{ path('app_mufas_show', {'id': mufa.id}) }}">show</a>
+                    <a type="button" class="btn btn-primary" href="{{ path('app_mufas_edit', {'id': mufa.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a type="button" class="btn btn-warning" href="{{ path('app_mufas_new') }}">Create new</a>
+{% endblock %}

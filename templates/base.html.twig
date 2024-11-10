@@ -19,6 +19,7 @@
             
             <script src="{{asset('resource/js/javascript.js')}}"></script>    
             <script src="{{asset('resource/bootstrap/js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('resource/js/select2.min.js')}}"></script>
 
             {# Mapas #}
             <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -72,6 +73,9 @@
             <a class="nav-item nav-link link-body-emphasis active" href="{{ path('app_all_users') }}">CouchDB</a>
             <a class="nav-item nav-link link-body-emphasis" href="{{path('app_admin_tech_index')}}">Postgres</a>
             <a class="nav-item nav-link link-body-emphasis" href="{{path('app_index_mapas')}}">Mapas</a>
+            <a class="nav-item nav-link link-body-emphasis active" href="{{ path('app_mufas_index') }}">Mufa-home</a>
+            <a class="nav-item nav-link link-body-emphasis active" href="{{ path('app_mufas_upload') }}">Mufa-Upload</a>
+            <a target="_top" class="nav-item nav-link link-body-emphasis active" href="{{ path('app_remo_search') }}">Mufa-Search</a>
             </nav>
         </div>
         {% endblock %}

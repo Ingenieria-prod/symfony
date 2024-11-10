@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mufas{% endblock %}
+
+{% block body %}
+    <h1>Mufas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mufa.id }}</td>
+            </tr>
+            <tr>
+                <th>Zonal</th>
+                <td>{{ mufa.zonal }}</td>
+            </tr>
+            <tr>
+                <th>Sitio</th>
+                <td>{{ mufa.sitio }}</td>
+            </tr>
+            <tr>
+                <th>Codigo_mufa</th>
+                <td>{{ mufa.codigoMufa }}</td>
+            </tr>
+            <tr>
+                <th>Distancia_optica</th>
+                <td>{{ mufa.distanciaOptica }}</td>
+            </tr>
+            <tr>
+                <th>Latitud</th>
+                <td>{{ mufa.latitud }}</td>
+            </tr>
+            <tr>
+                <th>Longitud</th>
+                <td>{{ mufa.longitud }}</td>
+            </tr>
+            <tr>
+                <th>Referencia</th>
+                <td>{{ mufa.referencia }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a type="button" class="btn btn-secondary" href="{{ path('app_mufas_index') }}">back to list</a>
+
+    <a type="button" class="btn btn-primary" href="{{ path('app_mufas_edit', {'id': mufa.id}) }}">edit</a>
+
+    {{ include('mufas/_delete_form.html.twig') }}
+    
+{% endblock %}

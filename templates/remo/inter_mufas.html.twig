@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mufas proximas a la falla{% endblock %}
+
+{% block body %}
+
+
+ <div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Mufa Próxima</h2>
+        <p class="card-text">
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Zonal</strong>
+            {{mufa_lower.zonal}}</p>   
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Sitio</strong>
+            {{mufa_lower.sitio}}</p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Cable</strong>
+            {{mufa_lower.cable}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Codigo Mufa</strong>
+            {{mufa_lower.codigoMufa}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Referencia</strong>
+            {{mufa_lower.referencia}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Distancia Óptica</strong>
+            {{mufa_lower.distanciaOptica}}
+            </p>
+        </p>
+          
+        <a target="_blank" href="https://www.waze.com/es/live-map/directions?to=ll.{{mufa_lower.latitud}}%2C{{mufa_lower.longitud}}" class="btn btn-primary">Como Llegar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Mufa Siguiente</h2>
+         <p class="card-text">
+         <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Zonal</strong>
+            {{mufa_upper.zonal}}</p>   
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Sitio</strong>
+            {{mufa_upper.sitio}}</p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Cable</strong>
+            {{mufa_upper.cable}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Codigo Mufa</strong>
+            {{mufa_upper.codigoMufa}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Referencia</strong>
+            {{mufa_upper.referencia}}
+            </p>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Distancia Óptica</strong>
+            {{mufa_upper.distanciaOptica}}
+            </p>
+          </p>
+        <a target="_blank" href="https://www.waze.com/es/live-map/directions?to=ll.{{mufa_upper.latitud}}%2C{{mufa_upper.longitud}}" class="btn btn-primary">Como Llegar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+{% endblock %}
+

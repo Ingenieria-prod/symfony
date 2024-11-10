@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mufas relacionadas{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Aqui el formulario de calculo de mufa</h1>
+    {{ include('remo/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const zonalSelect = document.querySelector('#remo_zonal');
+    const sitioSelect = document.querySelector('#remo_sitio');
+    const cableSelect = document.querySelector('#remo_cable');
+
+    function resetSelect(selectElement, placeholder = 'Seleccione una opción') {
+        selectElement.innerHTML = `<option value="">${placeholder}</option>`;
+        selectElement.disabled = true;
+    }
+
+
+    function loadOptions(selectElement, options) {
+        selectElement.disabled = false;
+        let currentValue = selectElement.value;
+        selectElement.innerHTML = '<option value="">Seleccione una opción</option>';
+        options.forEach(option => {
+            let optionElement = new Option(option, option);
+            selectElement.add(optionElement);
+        });
+        if (options.includes(currentValue)) {
+            selectElement.value = currentValue;
+        }
+    }
+
+
+    function initializeSelect2(element) {
+        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.select2 !== 'undefined') {
+            jQuery(element).select2({
+                width: '100%',
+                placeholder: element.options[0].text
+            });
+        }
+    }
+
+  
+    zonalSelect.addEventListener('change', function() {
+        resetSelect(sitioSelect, 'Seleccione un sitio');
+        resetSelect(cableSelect, 'Seleccione un cable');
+        
+        if (this.value) {
+            fetch(`/mufa/calculo/remo/get-sitios/${this.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    loadOptions(sitioSelect, data);
+                    if (typeof jQuery !== 'undefined') {
+                        jQuery(sitioSelect).trigger('change');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+  
+    sitioSelect.addEventListener('change', function() {
+        resetSelect(cableSelect, 'Seleccione un cable');
+        
+        if (this.value && zonalSelect.value) {
+            fetch(`/mufa/calculo/remo/get-cables/${zonalSelect.value}/${this.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    loadOptions(cableSelect, data);
+                    if (typeof jQuery !== 'undefined') {
+                        jQuery(cableSelect).trigger('change');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+
+    resetSelect(sitioSelect, 'Seleccione un sitio');
+    resetSelect(cableSelect, 'Seleccione un cable');
+
+    [zonalSelect, sitioSelect, cableSelect].forEach(initializeSelect2);
+});
+</script>
+{% endblock %}
+

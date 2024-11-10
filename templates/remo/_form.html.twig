@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_row(form.zonal) }}
+    {{ form_row(form.sitio) }}
+    {{ form_row(form.cable) }}
+    {{ form_row(form.distancia_corte )}}
+
+    <button type="submit" class="btn btn-success">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}
+
+

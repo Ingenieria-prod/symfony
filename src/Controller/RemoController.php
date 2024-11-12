@@ -73,10 +73,10 @@ class RemoController extends AbstractController
                             }
                         }
                     }
-                       
+                                       
                     return $this->redirectToRoute('app_remo_inter_mufas', [
-                        'id_lower'=> $lower->getId(), 
-                        'id_upper'=>$upper->getId()
+                        'id_lower'=> $lower?->getId() ?? 'No Existe', 
+                        'id_upper'=>$upper?->getId() ?? 'No Existe' 
                     ], Response::HTTP_SEE_OTHER);    
                 } 
                 catch (\Exception $e) {
@@ -90,9 +90,38 @@ class RemoController extends AbstractController
 
     #[Route('/intermufas/{id_lower}/{id_upper}', name: 'app_remo_inter_mufas')]
     public function indintermufas(Request $request, $id_lower, $id_upper,EntityManagerInterface $entityManager): Response
-    {  
+    {   
+       
+        if($id_lower!='No Existe'){
         $mufa_lower = $entityManager->getRepository(Mufas::class)->findOneBy(['id'=>$id_lower]);
+        } else{
+            $mufa_lower = array(
+                'zonal'=>'-',
+                'sitio' => '-',
+                'cable' => '-',
+                'distanciaOptica' => '-',
+                'referencia' => '-',
+                'codigoMufa' =>'-',
+                'latitud' =>'0',
+                'longitud' =>'0'
+
+            );
+        }
+        if($id_upper!='No Existe'){
         $mufa_upper = $entityManager->getRepository(Mufas::class)->findOneBy(['id'=>$id_upper]);
+        } else {
+            $mufa_upper = array(
+                'zonal'=>'-',
+                'sitio' => '-',
+                'cable' => '-',
+                'distanciaOptica' => '-',
+                'referencia' => '-',
+                'codigoMufa' =>'-',
+                'latitud' =>'0',
+                'longitud' =>'0'
+
+            );
+        }
 
         return $this->render('remo/inter_mufas.html.twig',[
             'mufa_lower'=> $mufa_lower, 
